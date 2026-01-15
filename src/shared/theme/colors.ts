@@ -60,7 +60,7 @@ export const darkColors = {
   // Secondary colors
   secondary: "#5E5CE6",
   secondaryLight: "#8381FF",
-  secondaryDark: "#2D2BA7",
+  secondaryDark: "#080A0C",
   secondaryContrast: "#FFFFFF",
 
   // Semantic colors
@@ -87,6 +87,7 @@ export const darkColors = {
     default: "#38383A",
     focused: "#0A84FF",
     error: "#EF4343",
+    navBorder: "#272C35",
   },
 
   // Action colors

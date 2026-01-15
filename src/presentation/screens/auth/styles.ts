@@ -3,25 +3,6 @@ import { Theme } from "../../../shared/theme"
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    keyboardAvoid: {
-      flex: 1,
-    },
-    scrollView: {
-      flexGrow: 1,
-    },
-    content: {
-      flex: 1,
-      paddingHorizontal: theme.layout.screenPaddingHorizontal,
-      paddingTop: theme.spacing.xxl,
-      paddingBottom: theme.spacing.xl,
-    },
-    header: {
-      marginBottom: theme.spacing.xxl,
-      alignItems: "center",
-    },
-    subtitle: {
-      marginTop: theme.spacing.sm,
-    },
     form: {
       marginBottom: theme.spacing.lg,
     },

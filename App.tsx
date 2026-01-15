@@ -1,5 +1,6 @@
 import "react-native-gesture-handler"
 import React from "react"
+import { SafeAreaProvider } from "react-native-safe-area-context"
 import { ThemeProvider } from "./src/shared/theme/ThemeContext"
 import { AuthProvider } from "./src/state/contexts/AuthContext"
 import { RootNavigator } from "./src/presentation/navigation"
@@ -22,10 +23,12 @@ export default function App() {
   })
 
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <RootNavigator />
-      </AuthProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <RootNavigator />
+        </AuthProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   )
 }

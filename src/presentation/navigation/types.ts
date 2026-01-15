@@ -1,6 +1,7 @@
 import { NavigatorScreenParams } from "@react-navigation/native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { DrawerScreenProps } from "@react-navigation/drawer"
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { CompositeScreenProps } from "@react-navigation/native"
 
 // Define the param lists for each navigator
@@ -11,9 +12,17 @@ export type AuthStackParamList = {
   SignUp: undefined
 }
 
+// Tab param list
+export type TabParamList = {
+  Home: undefined
+  TokenOffering: undefined
+  Transactions: undefined
+  Profile: undefined
+}
+
 // Drawer param list
 export type DrawerParamList = {
-  Home: undefined
+  TabStack: NavigatorScreenParams<TabParamList>
   Offering: undefined
   Profile: undefined
 }
@@ -21,8 +30,6 @@ export type DrawerParamList = {
 // App Stack param list
 export type AppStackParamList = {
   Drawer: NavigatorScreenParams<DrawerParamList>
-  // Add more app screens here as needed
-  // Settings: undefined;
 }
 
 // Root Stack param list
@@ -43,20 +50,26 @@ export type SignUpScreenProps = NativeStackScreenProps<
   "SignUp"
 >
 
-// Drawer screens
+// Tab screens (Nested in Drawer)
 export type HomeScreenProps = CompositeScreenProps<
-  DrawerScreenProps<DrawerParamList, "Home">,
-  NativeStackScreenProps<AppStackParamList>
+  BottomTabScreenProps<TabParamList, "Home">,
+  DrawerScreenProps<DrawerParamList>
 >
 
-export type OfferingScreenProps = CompositeScreenProps<
+// Drawer screens
+export type TokenOfferingScreenProps = CompositeScreenProps<
   DrawerScreenProps<DrawerParamList, "Offering">,
   NativeStackScreenProps<AppStackParamList>
 >
 
-export type ProfileScreenProps = CompositeScreenProps<
+export type DrawerProfileScreenProps = CompositeScreenProps<
   DrawerScreenProps<DrawerParamList, "Profile">,
   NativeStackScreenProps<AppStackParamList>
+>
+
+export type ProfileScreenProps = CompositeScreenProps<
+  BottomTabScreenProps<TabParamList, "Profile">,
+  DrawerScreenProps<DrawerParamList>
 >
 
 // Root screens

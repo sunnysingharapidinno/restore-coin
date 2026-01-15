@@ -13,15 +13,17 @@ export const Routes = {
 
   // App routes
   DRAWER: "Drawer",
+  TAB_STACK: "TabStack",
 
-  // Drawer routes
+  // Tab routes
   HOME: "Home",
-  OFFERING: "Offering",
+  BUY_TOKENS: "BuyTokens",
+  TOKEN_OFFERING: "TokenOffering",
+  TRANSACTIONS: "Transactions",
   PROFILE: "Profile",
 
-  // Add more routes as needed
-  // SETTINGS: 'Settings',
-  // WALLET: 'Wallet',
+  // Legacy drawer routes
+  OFFERING: "Offering",
 } as const
 
 // Auth flow specific options

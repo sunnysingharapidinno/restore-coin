@@ -36,8 +36,7 @@ export const ScreenLayout: React.FC<ScreenLayoutProps> = ({
       style={[
         styles.container,
         { backgroundColor: backgroundColor || theme.colors.background },
-      ]}
-    >
+      ]}>
       {/* Status Bar Configuration */}
       <StatusBar
         barStyle='light-content'
@@ -54,29 +53,28 @@ export const ScreenLayout: React.FC<ScreenLayoutProps> = ({
       />
 
       {/* AppBar */}
-      {/* {showAppBar && (
+      {showAppBar && (
         <AppBar
           showDrawerMenu={showDrawerMenu}
           showWallet={showWallet}
           onMenuPress={onMenuPress}
           onWalletPress={onWalletPress}
         />
-      )} */}
+      )}
 
-      <AppBar
+      {/* <AppBar
         showDrawerMenu
         showWallet
         onMenuPress={onMenuPress}
         onWalletPress={onWalletPress}
-      />
+      /> */}
 
       {/* Content Area */}
       <View style={styles.content}>
         {Platform.OS === "ios" ? (
           <SafeAreaView
             style={styles.safeArea}
-            edges={["bottom", "left", "right"]}
-          >
+            edges={["bottom", "left", "right"]}>
             {children}
           </SafeAreaView>
         ) : (

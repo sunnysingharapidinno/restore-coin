@@ -7,9 +7,9 @@ import {
 import { View, StyleSheet, TouchableOpacity } from "react-native"
 import { DrawerParamList } from "../types"
 import { Routes } from "../constants"
-import { HomeScreen } from "../../screens/home"
 import { useTheme } from "../../../shared/theme/ThemeContext"
 import { useAuth } from "../../../state/contexts/AuthContext"
+import { TabNavigator } from "./TabNavigator"
 import {
   Typography,
   OfferingIcon,
@@ -91,6 +91,12 @@ const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
 
       <View>
         <MenuItem
+          icon={<HamburgerIcon size={24} />}
+          label='Home'
+          onPress={() => navigation.navigate(Routes.TAB_STACK)}
+        />
+
+        <MenuItem
           icon={<OfferingIcon size={24} />}
           label='Offering'
           onPress={() => navigation.navigate("Offering")}
@@ -127,14 +133,12 @@ const OfferingScreen = () => {
           backgroundColor: theme.colors.background,
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Typography variant='headlineMedium'>Offering Screen</Typography>
         <Typography
           variant='bodyLarge'
           color='secondary'
-          style={{ marginTop: 8 }}
-        >
+          style={{ marginTop: 8 }}>
           Coming Soon
         </Typography>
       </View>
@@ -153,14 +157,12 @@ const ProfileScreen = () => {
           backgroundColor: theme.colors.background,
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Typography variant='headlineMedium'>Profile Screen</Typography>
         <Typography
           variant='bodyLarge'
           color='secondary'
-          style={{ marginTop: 8 }}
-        >
+          style={{ marginTop: 8 }}>
           Coming Soon
         </Typography>
       </View>
@@ -184,13 +186,13 @@ export const DrawerNavigator: React.FC = () => {
         drawerActiveTintColor: theme.colors.primary,
         drawerInactiveTintColor: theme.colors.text.primary,
         overlayColor: "rgba(0, 0, 0, 0.5)",
-      }}
-    >
+      }}>
       <Drawer.Screen
-        name={Routes.HOME}
-        component={HomeScreen}
+        name={Routes.TAB_STACK}
+        component={TabNavigator}
         options={{
           drawerLabel: "Home",
+          headerShown: false,
         }}
       />
       <Drawer.Screen
