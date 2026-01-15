@@ -12,10 +12,16 @@ export type AuthStackParamList = {
   SignUp: undefined
 }
 
+// Token Stack param list
+export type TokenStackParamList = {
+  TokenOffering: undefined
+  BuyTokens: undefined
+}
+
 // Tab param list
 export type TabParamList = {
   Home: undefined
-  TokenOffering: undefined
+  TokenStack: NavigatorScreenParams<TokenStackParamList>
   Transactions: undefined
   Profile: undefined
 }
@@ -56,10 +62,21 @@ export type HomeScreenProps = CompositeScreenProps<
   DrawerScreenProps<DrawerParamList>
 >
 
-// Drawer screens
+// Tab screen
 export type TokenOfferingScreenProps = CompositeScreenProps<
-  DrawerScreenProps<DrawerParamList, "Offering">,
-  NativeStackScreenProps<AppStackParamList>
+  NativeStackScreenProps<TokenStackParamList, "TokenOffering">,
+  CompositeScreenProps<
+    BottomTabScreenProps<TabParamList>,
+    DrawerScreenProps<DrawerParamList>
+  >
+>
+
+export type BuyTokensScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<TokenStackParamList, "BuyTokens">,
+  CompositeScreenProps<
+    BottomTabScreenProps<TabParamList>,
+    DrawerScreenProps<DrawerParamList>
+  >
 >
 
 export type DrawerProfileScreenProps = CompositeScreenProps<

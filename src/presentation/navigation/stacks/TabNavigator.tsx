@@ -8,7 +8,7 @@ import { useTheme } from "../../../shared/theme/ThemeContext"
 import { HomeScreen } from "../../screens/home"
 import { TransactionsScreen } from "../../screens/transactions"
 import { ProfileScreen } from "../../screens/profile"
-import { TokenOfferingScreen } from "../../screens/token-offering"
+import { TokenStackNavigator } from "./TokenStackNavigator"
 import { Image } from "react-native"
 import AppIcons from "../../../assets/icons/AppIcons"
 
@@ -47,7 +47,7 @@ export const TabNavigator: React.FC = () => {
         tabBarIcon: ({ focused, color }) => {
           if (route.name === Routes.HOME) {
             return <Feather name='home' size={24} color={color} />
-          } else if (route.name === Routes.TOKEN_OFFERING) {
+          } else if (route.name === Routes.TOKEN_STACK) {
             return (
               <Image
                 source={focused ? AppIcons.coinsGreenIcon : AppIcons.coinsIcon}
@@ -81,8 +81,8 @@ export const TabNavigator: React.FC = () => {
         }}
       />
       <Tab.Screen
-        name={Routes.TOKEN_OFFERING}
-        component={TokenOfferingScreen}
+        name={Routes.TOKEN_STACK}
+        component={TokenStackNavigator}
         options={{
           tabBarLabel: "Buy Tokens",
         }}

@@ -17,6 +17,7 @@ export const Routes = {
 
   // Tab routes
   HOME: "Home",
+  TOKEN_STACK: "TokenStack",
   BUY_TOKENS: "BuyTokens",
   TOKEN_OFFERING: "TokenOffering",
   TRANSACTIONS: "Transactions",

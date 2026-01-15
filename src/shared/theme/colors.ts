@@ -46,6 +46,9 @@ export const lightColors = {
     disabledBackground: "rgba(118, 118, 128, 0.12)",
   },
 
+  cardBg: "#0E1115",
+  cardSecondaryBg: "#0A0C0F",
+  lineColor: "rgba(39, 44, 53, 0.30)",
   textboxBg: "#13161B",
   textboxBorder: "rgba(39, 44, 53, 0.50)",
 }
@@ -99,6 +102,9 @@ export const darkColors = {
     disabledBackground: "rgba(118, 118, 128, 0.12)",
   },
 
+  cardBg: "#0E1115",
+  cardSecondaryBg: "#0A0C0F",
+  lineColor: "rgba(39, 44, 53, 0.30)",
   textboxBg: "#13161B",
   textboxBorder: "rgba(39, 44, 53, 0.50)",
 }

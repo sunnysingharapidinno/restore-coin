@@ -9,8 +9,8 @@ export const ProfileScreen: React.FC = () => {
 
   return (
     <PageLayoutWrap
-      showDrawerMenu={false}
-      showWallet={false}
+      showDrawerMenu
+      showWallet
       heading='My Profile'
       subHeading='Complete your secure token purchase and support long-term environmental restoration.'>
       <View
