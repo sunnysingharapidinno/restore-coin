@@ -7,7 +7,7 @@ import CardWrap from "../../components/organisms/CardWrap"
 import { Theme } from "../../../shared/theme"
 import AppIcons from "../../../assets/icons/AppIcons"
 import { useNavigation } from "@react-navigation/native"
-import { Routes } from "../../navigation"
+import { Routes } from "../../navigation/constants"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { TokenStackParamList } from "../../navigation/types"
 

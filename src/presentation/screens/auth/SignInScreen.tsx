@@ -8,7 +8,7 @@ import { useAuth } from "../../../state/contexts/AuthContext"
 import Feather from "@expo/vector-icons/Feather"
 import Octicons from "@expo/vector-icons/Octicons"
 import { createStyles } from "./styles"
-import { Routes } from "../../navigation"
+import { Routes } from "../../navigation/constants"
 import { useFormik } from "formik"
 import { SignInSchema } from "./validation"
 

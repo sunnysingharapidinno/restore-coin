@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native"
 import { Typography } from "../../components/atoms"
-import { ScreenLayout } from "../organisms"
+import { ScreenLayout } from "./ScreenLayout"
 
 import { Theme } from "../../../shared/theme"
 import { useTheme } from "../../../shared/theme/ThemeContext"
