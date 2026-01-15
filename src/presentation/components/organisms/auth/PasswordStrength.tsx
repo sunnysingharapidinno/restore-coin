@@ -1,8 +1,8 @@
 import React, { useMemo } from "react"
 import { View, Text, StyleSheet } from "react-native"
-import { useTheme } from "../../../shared/theme/ThemeContext"
-import { Theme } from "../../../shared/theme"
-import { Typography } from "../../components/atoms"
+import { useTheme } from "../../../../shared/theme/ThemeContext"
+import { Typography } from "../../atoms"
+import { Theme } from "../../../../shared/theme"
 
 interface PasswordStrengthProps {
   password: string
