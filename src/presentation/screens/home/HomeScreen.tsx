@@ -54,6 +54,33 @@ const SUPPORT_PROJECTS = [
   },
 ]
 
+const SCAN_ACTIONS = [
+  {
+    key: "yard-garden",
+    title: "Yard & Garden",
+    icon: "yard",
+    color: "#F97316", // warm orange
+  },
+  {
+    key: "tree-health",
+    title: "Tree Health",
+    icon: "park",
+    color: "#3B82F6", // blue
+  },
+  {
+    key: "haul-load",
+    title: "Haul Load",
+    icon: "local-shipping",
+    color: "#A855F7", // purple
+  },
+  {
+    key: "recycling-hub",
+    title: "Recycling Hub",
+    icon: "recycling",
+    color: "#22C55E", // green
+  },
+]
+
 interface RedemptionCardConfig {
   key: string
   title: string
@@ -359,9 +386,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
           </View>
 
           {/* Footer copy */}
-          <View style={styles.footerSection}>
+          <View>
             <Typography
-              variant='titleLarge'
+              variant='bodyLarge'
               color='success'
               style={styles.footerTitle}
             >
@@ -371,6 +398,44 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
             <Typography variant='bodyMedium' color='secondary'>
               Transform your assets into rewards
             </Typography>
+
+            <View style={styles.scanList}>
+              {SCAN_ACTIONS.map((action) => (
+                <LinearGradient
+                  colors={["rgba(16, 24, 40, 0.50)", "rgba(30, 41, 57, 0.30)"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  key={action.key}
+                  style={styles.scanCard}
+                >
+                  <View
+                    style={[
+                      styles.scanIconCircle,
+                      { backgroundColor: action.color },
+                    ]}
+                  >
+                    <IconComponent name={action.icon} size={18} />
+                  </View>
+
+                  <View style={styles.scanTextColumn}>
+                    <Typography variant='labelLarge' color='primary'>
+                      {action.title}
+                    </Typography>
+
+                    <View style={styles.scanPill}>
+                      <Typography
+                        variant='labelSmall'
+                        color='secondary'
+                        align='center'
+                        style={{ fontSize: 10 }}
+                      >
+                        +50-200 coins
+                      </Typography>
+                    </View>
+                  </View>
+                </LinearGradient>
+              ))}
+            </View>
           </View>
 
           {/* Support. Impact. Heal section */}
@@ -642,14 +707,51 @@ const createStyles = (theme: Theme) =>
       borderColor: "rgba(16, 185, 129, 0.30)",
     },
 
-    footerSection: {
-      marginBottom: theme.spacing.lg,
-    },
     footerTitle: {
       marginBottom: theme.spacing.xs,
     },
+    scanList: {
+      marginTop: theme.spacing.lg,
+    },
+    scanCard: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: theme.spacing.md,
+      borderRadius: 14,
+
+      borderWidth: 1,
+
+      borderColor: "rgba(216, 231, 242, 0.07)",
+      marginBottom: 12,
+
+      // iOS: top shadow (negative Y)
+      shadowColor: "rgba(207, 231, 255, 1)",
+      shadowOffset: { width: 0, height: -1 },
+      shadowOpacity: 0.2,
+      shadowRadius: 1,
+    },
+    scanIconCircle: {
+      width: 36,
+      height: 36,
+      borderRadius: 8,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: 12,
+    },
+    scanTextColumn: {
+      flex: 1,
+    },
+    scanPill: {
+      alignSelf: "flex-start",
+      marginTop: theme.spacing.xs,
+      paddingHorizontal: 10,
+      paddingVertical: 2,
+      borderRadius: theme.radius.full,
+      borderWidth: 1,
+      borderColor: theme.colors.border.navBorder,
+    },
     sectionWrapper: {
-      marginTop: theme.spacing.xxl,
+      marginTop: theme.spacing.lg,
     },
 
     sectionSubtitle: {
