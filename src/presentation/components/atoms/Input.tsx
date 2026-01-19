@@ -28,6 +28,8 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
+
   const isPasswordField = secureTextEntry
 
   const { theme } = useTheme()
@@ -37,16 +39,16 @@ export const Input: React.FC<InputProps> = ({
     <View style={styles.wrapper}>
       {/* Label */}
       {label && (
-        <Text style={[typography.bodyLarge, styles.label]}>{label}</Text>
+        <Text style={[typography.bodyMedium, styles.label]}>{label}</Text>
       )}
 
       {/* Input wrapper */}
       <View
         style={[
           styles.inputContainer,
-          Boolean(errorLabel) && styles.inputError,
-        ]}
-      >
+          isFocused && styles.inputFocused,
+          Boolean(errorLabel) && styles.inputError, // error wins
+        ]}>
         {/* Left Icon */}
         {startIcon && <View style={styles.leftIcon}>{startIcon}</View>}
 
@@ -56,12 +58,14 @@ export const Input: React.FC<InputProps> = ({
           keyboardType={keyboardType}
           style={[
             styles.input,
-            Boolean(startIcon) && { paddingLeft: 44 },
-            isPasswordField && { paddingRight: 44 },
+            Boolean(startIcon) && styles.withLeftIcon,
+            isPasswordField && styles.withRightIcon,
             style,
           ]}
           placeholderTextColor={theme?.colors?.text?.secondary}
           secureTextEntry={isPasswordField && !isPasswordVisible}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
 
         {/* Password toggle */}
@@ -69,8 +73,7 @@ export const Input: React.FC<InputProps> = ({
           <TouchableOpacity
             onPress={() => setIsPasswordVisible((p) => !p)}
             style={styles.rightIcon}
-            activeOpacity={0.7}
-          >
+            activeOpacity={0.7}>
             <MaterialIcons
               name={isPasswordVisible ? "visibility" : "visibility-off"}
               size={24}
@@ -100,23 +103,35 @@ const createStyles = (theme: Theme) =>
     },
 
     inputContainer: {
-      height: 52,
+      height: 40,
       borderRadius: 10,
-      backgroundColor: theme?.colors?.textboxBg,
-      borderWidth: 2,
-      borderColor: theme?.colors?.textboxBorder,
+      backgroundColor: theme.colors.textboxBg,
+      borderWidth: 1,
+      borderColor: theme.colors.textboxBorder,
       justifyContent: "center",
     },
 
+    inputFocused: {
+      borderColor: theme.colors.primary,
+    },
+
     inputError: {
-      borderColor: theme?.colors?.border?.error,
+      borderColor: theme.colors.border.error, // 👈 highest priority
     },
 
     input: {
       height: "100%",
       paddingHorizontal: 16,
-      color: theme?.colors?.primaryContrast,
+      color: theme.colors.primaryContrast,
       fontSize: 14,
+    },
+
+    withLeftIcon: {
+      paddingLeft: 44,
+    },
+
+    withRightIcon: {
+      paddingRight: 44,
     },
 
     leftIcon: {
@@ -134,7 +149,7 @@ const createStyles = (theme: Theme) =>
 
     errorText: {
       marginTop: 6,
-      color: theme?.colors?.error,
+      color: theme.colors.error,
       fontSize: 12,
     },
   })

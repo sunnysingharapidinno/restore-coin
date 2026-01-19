@@ -42,7 +42,11 @@ export const PageLayoutWrap: React.FC<PageLayoutWrapProps> = ({
           keyboardShouldPersistTaps='handled'>
           <View style={styles.content}>
             <View style={styles.header}>
-              <Typography variant='headlineLarge'>{heading}</Typography>
+              <Typography
+                style={{ textAlign: "center" }}
+                variant='headlineSmall'>
+                {heading}
+              </Typography>
               <Typography
                 variant='bodyLarge'
                 color='secondary'

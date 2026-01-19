@@ -138,7 +138,7 @@ export const Button: React.FC<ButtonProps> = ({
       case "large":
         return "labelLarge"
       default:
-        return "labelLarge"
+        return "titleMedium"
     }
   }
 
@@ -147,8 +147,7 @@ export const Button: React.FC<ButtonProps> = ({
       style={[styles.button, style]}
       disabled={disabled || loading}
       activeOpacity={0.8}
-      {...touchableProps}
-    >
+      {...touchableProps}>
       {loading ? (
         <ActivityIndicator
           size='small'

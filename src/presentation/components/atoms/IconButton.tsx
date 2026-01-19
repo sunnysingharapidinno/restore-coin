@@ -5,8 +5,11 @@ import {
   ViewStyle,
   TouchableOpacityProps,
   View,
+  ColorValue,
+  StyleProp,
 } from "react-native"
 import { useTheme } from "../../../shared/theme/ThemeContext"
+import { LinearGradient, LinearGradientPoint } from "expo-linear-gradient"
 
 interface IconButtonProps extends TouchableOpacityProps {
   size?: "small" | "medium" | "large"
@@ -14,6 +17,12 @@ interface IconButtonProps extends TouchableOpacityProps {
   disabled?: boolean
   children: React.ReactNode // Icon component
   iconColor?: string
+  gradientConfig?: {
+    colors: readonly [ColorValue, ColorValue, ...ColorValue[]]
+    style?: StyleProp<ViewStyle>
+    start?: LinearGradientPoint
+    end?: LinearGradientPoint
+  }
 }
 
 export const IconButton: React.FC<IconButtonProps> = ({
@@ -23,6 +32,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   children,
   iconColor,
   style,
+  gradientConfig,
   ...touchableProps
 }) => {
   const { theme } = useTheme()
@@ -45,7 +55,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
             height: 40,
             padding: theme.spacing.md,
           },
-          iconSize: 20,
+          iconSize: 28,
         }
       case "medium":
       default:
@@ -113,13 +123,39 @@ export const IconButton: React.FC<IconButtonProps> = ({
     return theme.colors.primary
   }
 
+  if (gradientConfig?.colors) {
+    return (
+      <TouchableOpacity
+        style={[styles.button, style]}
+        disabled={disabled}
+        activeOpacity={0.8}
+        {...touchableProps}>
+        <View style={styles.iconWrapper}>
+          <LinearGradient
+            colors={gradientConfig?.colors}
+            start={gradientConfig?.start}
+            end={gradientConfig?.end}
+            style={gradientConfig?.style}>
+            {React.isValidElement(children)
+              ? React.cloneElement(children as React.ReactElement<any>, {
+                  width: iconSize,
+                  height: iconSize,
+                  color: getIconColor(),
+                  fill: getIconColor(),
+                })
+              : children}
+          </LinearGradient>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <TouchableOpacity
       style={[styles.button, style]}
       disabled={disabled}
       activeOpacity={0.8}
-      {...touchableProps}
-    >
+      {...touchableProps}>
       <View style={styles.iconWrapper}>
         {React.isValidElement(children)
           ? React.cloneElement(children as React.ReactElement<any>, {

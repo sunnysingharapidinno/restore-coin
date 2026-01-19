@@ -14,17 +14,6 @@ export const RootNavigator: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth()
   const [showSplash, setShowSplash] = useState(true)
 
-  useEffect(() => {
-    // Hide splash screen after auth check is complete
-    if (!isLoading) {
-      const timer = setTimeout(() => {
-        setShowSplash(false)
-      }, 1500) // Show splash for at least 1.5 seconds
-
-      return () => clearTimeout(timer)
-    }
-  }, [isLoading])
-
   if (showSplash || isLoading) {
     return <SplashScreen onFinish={() => setShowSplash(false)} />
   }
@@ -35,8 +24,7 @@ export const RootNavigator: React.FC = () => {
         screenOptions={{
           headerShown: false,
           animation: "fade",
-        }}
-      >
+        }}>
         {isAuthenticated ? (
           <Stack.Screen
             name={Routes.APP}

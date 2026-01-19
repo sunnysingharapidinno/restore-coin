@@ -1,0 +1,5 @@
+export { SplashStepOne } from "./SplashStepOne"
+export { SplashStepTwo } from "./SplashStepTwo"
+export { SplashStepThree } from "./SplashStepThree"
+export { SplashStepFour } from "./SplashStepFour"
+export { SplashStepFive } from "./SplashStepFive"

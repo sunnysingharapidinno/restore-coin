@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { View, StyleSheet, Image, Platform } from "react-native"
 import { useNavigation, DrawerActions } from "@react-navigation/native"
 import { MaterialIcons } from "@expo/vector-icons"
 import { IconButton } from "../atoms/IconButton"
 import { useTheme } from "../../../shared/theme/ThemeContext"
 import AppIcons from "../../../assets/icons/AppIcons"
+import { Theme } from "../../../shared/theme"
 
 interface AppBarProps {
   showDrawerMenu?: boolean
@@ -21,6 +22,8 @@ export const AppBar: React.FC<AppBarProps> = ({
 }) => {
   const navigation = useNavigation()
   const { theme } = useTheme()
+
+  const styles = useMemo(() => createStyles(theme), [theme])
 
   const handleMenuPress = () => {
     if (onMenuPress) {
@@ -46,8 +49,7 @@ export const AppBar: React.FC<AppBarProps> = ({
           backgroundColor: theme.colors.background,
           borderBottomColor: theme.colors.border.default,
         },
-      ]}
-    >
+      ]}>
       {/* Left Section */}
       <View style={styles.leftSection}>
         {showDrawerMenu && (
@@ -79,8 +81,7 @@ export const AppBar: React.FC<AppBarProps> = ({
             onPress={handleWalletPress}
             size='medium'
             variant='outlined'
-            style={styles.walletBtn}
-          >
+            style={styles.walletBtn}>
             <Image
               source={AppIcons.walletIcon}
               style={{ width: 12, height: 12 }}
@@ -92,42 +93,43 @@ export const AppBar: React.FC<AppBarProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
-  appBar: {
-    height: 67,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 24,
-    borderBottomWidth: 1,
-    alignContent: "center",
-  },
-  leftSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 16,
-  },
-  rightSection: {
-    alignItems: "center",
-  },
-  logoContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  walletBtn: {
-    borderWidth: 2,
-    borderColor: "rgba(33, 196, 93, 0.25)",
-    backgroundColor: "rgba(34, 197, 94, 0.20)",
+const createStyles = (theme: Theme) =>
+  StyleSheet.create({
+    appBar: {
+      height: 67,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingHorizontal: 24,
+      borderBottomWidth: 1,
+      alignContent: "center",
+    },
+    leftSection: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 16,
+    },
+    rightSection: {
+      alignItems: "center",
+    },
+    logoContainer: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    walletBtn: {
+      borderWidth: 2,
+      borderColor: theme?.colors?.border.greenBorder,
+      backgroundColor: theme?.colors?.greenBtnBg,
 
-    // iOS Shadow
-    shadowColor: "rgba(33, 196, 93, 0.40)",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 2,
+      // iOS Shadow
+      shadowColor: theme?.colors?.greenBtnShadow,
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 1,
+      shadowRadius: 2,
 
-    // Android Shadow
-    elevation: Platform.OS === "android" ? 2 : 0,
-  },
-})
+      // Android Shadow
+      elevation: Platform.OS === "android" ? 2 : 0,
+    },
+  })
 
 export default AppBar

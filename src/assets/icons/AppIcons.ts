@@ -6,17 +6,10 @@ import LogoutIcon from "./logout.png"
 import CoinsIcon from "./coins.png"
 import FileIcon from "./file.png"
 import CoinsGreenIcon from "./coins-green.png"
+import LogoTransparent from "./logo-transparent.png"
+import ArrowUpRightGreen from "./arrow-up-right-green.png"
 
 // Export individual icons for direct imports
-export {
-  LogoIcon,
-  WalletIcon,
-  WalletWhiteIcon,
-  LogoutIcon,
-  CoinsIcon,
-  FileIcon,
-  CoinsGreenIcon,
-}
 
 // Export AppIcons object for centralized access
 export const AppIcons = {
@@ -27,6 +20,8 @@ export const AppIcons = {
   coinsIcon: CoinsIcon,
   fileIcon: FileIcon,
   coinsGreenIcon: CoinsGreenIcon,
+  logoTransparent: LogoTransparent,
+  arrowUpRightGreen: ArrowUpRightGreen,
 }
 
 // Default export for convenience

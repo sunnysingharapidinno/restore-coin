@@ -3,6 +3,8 @@ import { View, StyleSheet, StatusBar, Platform } from "react-native"
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { AppBar } from "../molecules"
 import { useTheme } from "../../../shared/theme/ThemeContext"
+import { ImageBackground } from "react-native"
+import AppImages from "../../../assets/images/AppImages"
 
 interface ScreenLayoutProps {
   children: ReactNode
@@ -37,50 +39,56 @@ export const ScreenLayout: React.FC<ScreenLayoutProps> = ({
         styles.container,
         { backgroundColor: backgroundColor || theme.colors.background },
       ]}>
-      {/* Status Bar Configuration */}
-      <StatusBar
-        barStyle='light-content'
-        backgroundColor={Platform.OS === "android" ? "#000000" : undefined}
-        translucent={Platform.OS === "android"}
-      />
-
-      {/* Top Safe Area */}
-      <View
-        style={[
-          styles.statusBarArea,
-          { height: topSafeArea, backgroundColor: "#000000" },
-        ]}
-      />
-
-      {/* AppBar */}
-      {showAppBar && (
-        <AppBar
-          showDrawerMenu={showDrawerMenu}
-          showWallet={showWallet}
-          onMenuPress={onMenuPress}
-          onWalletPress={onWalletPress}
+      <ImageBackground
+        source={AppImages.backgroundImg}
+        style={{
+          flex: 1,
+        }}>
+        {/* Status Bar Configuration */}
+        <StatusBar
+          barStyle='light-content'
+          backgroundColor={Platform.OS === "android" ? "#000000" : undefined}
+          translucent={Platform.OS === "android"}
         />
-      )}
 
-      {/* <AppBar
+        {/* Top Safe Area */}
+        <View
+          style={[
+            styles.statusBarArea,
+            { height: topSafeArea, backgroundColor: "#000000" },
+          ]}
+        />
+
+        {/* AppBar */}
+        {showAppBar && (
+          <AppBar
+            showDrawerMenu={showDrawerMenu}
+            showWallet={showWallet}
+            onMenuPress={onMenuPress}
+            onWalletPress={onWalletPress}
+          />
+        )}
+
+        {/* <AppBar
         showDrawerMenu
         showWallet
         onMenuPress={onMenuPress}
         onWalletPress={onWalletPress}
       /> */}
 
-      {/* Content Area */}
-      <View style={styles.content}>
-        {Platform.OS === "ios" ? (
-          <SafeAreaView
-            style={styles.safeArea}
-            edges={["bottom", "left", "right"]}>
-            {children}
-          </SafeAreaView>
-        ) : (
-          <View style={styles.safeArea}>{children}</View>
-        )}
-      </View>
+        {/* Content Area */}
+        <View style={styles.content}>
+          {Platform.OS === "ios" ? (
+            <SafeAreaView
+              style={styles.safeArea}
+              edges={["bottom", "left", "right"]}>
+              {children}
+            </SafeAreaView>
+          ) : (
+            <View style={styles.safeArea}>{children}</View>
+          )}
+        </View>
+      </ImageBackground>
     </View>
   )
 }

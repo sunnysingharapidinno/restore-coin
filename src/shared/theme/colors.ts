@@ -35,7 +35,11 @@ export const lightColors = {
     default: "#E5E5EA",
     focused: "#007AFF",
     error: "#FF3B30",
+    greenBorder: "rgba(33, 196, 93, 0.25)",
   },
+
+  greenBtnBg: "rgba(34, 197, 94, 0.20)",
+  greenBtnShadow: "rgba(33, 196, 93, 0.40)",
 
   // Action colors
   action: {
@@ -91,7 +95,11 @@ export const darkColors = {
     focused: "#0A84FF",
     error: "#EF4343",
     navBorder: "#272C35",
+    greenBorder: "rgba(33, 196, 93, 0.25)",
   },
+
+  greenBtnBg: "rgba(34, 197, 94, 0.20)",
+  greenBtnShadow: "rgba(33, 196, 93, 0.40)",
 
   // Action colors
   action: {
