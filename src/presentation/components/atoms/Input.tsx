@@ -25,6 +25,7 @@ export const Input: React.FC<InputProps> = ({
   errorLabel,
   style,
   keyboardType,
+  onBlur,
   ...props
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
@@ -48,7 +49,8 @@ export const Input: React.FC<InputProps> = ({
           styles.inputContainer,
           isFocused && styles.inputFocused,
           Boolean(errorLabel) && styles.inputError, // error wins
-        ]}>
+        ]}
+      >
         {/* Left Icon */}
         {startIcon && <View style={styles.leftIcon}>{startIcon}</View>}
 
@@ -65,7 +67,10 @@ export const Input: React.FC<InputProps> = ({
           placeholderTextColor={theme?.colors?.text?.secondary}
           secureTextEntry={isPasswordField && !isPasswordVisible}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onBlur={(e) => {
+            setIsFocused(false)
+            onBlur?.(e)
+          }}
         />
 
         {/* Password toggle */}
@@ -73,7 +78,8 @@ export const Input: React.FC<InputProps> = ({
           <TouchableOpacity
             onPress={() => setIsPasswordVisible((p) => !p)}
             style={styles.rightIcon}
-            activeOpacity={0.7}>
+            activeOpacity={0.7}
+          >
             <MaterialIcons
               name={isPasswordVisible ? "visibility" : "visibility-off"}
               size={24}

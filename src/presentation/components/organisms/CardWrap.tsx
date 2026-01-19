@@ -1,17 +1,49 @@
 import React, { ReactNode, useMemo } from "react"
-import { View, StyleSheet, Platform, StyleProp, ViewStyle } from "react-native"
+import {
+  View,
+  StyleSheet,
+  Platform,
+  StyleProp,
+  ViewStyle,
+  ColorValue,
+} from "react-native"
 import { Theme } from "../../../shared/theme"
 import { useTheme } from "../../../shared/theme/ThemeContext"
+import { LinearGradient, LinearGradientPoint } from "expo-linear-gradient"
 
 interface CardWrapProps {
   children: ReactNode
   style?: StyleProp<ViewStyle>
+  gradientConfig?: {
+    colors: readonly [ColorValue, ColorValue, ...ColorValue[]]
+    start?: LinearGradientPoint
+    end?: LinearGradientPoint
+    locations?: [number, number, ...number[]]
+  }
 }
 
-export const CardWrap: React.FC<CardWrapProps> = ({ children, style }) => {
+export const CardWrap: React.FC<CardWrapProps> = ({
+  children,
+  style,
+  gradientConfig,
+}) => {
   const { theme } = useTheme()
 
   const styles = useMemo(() => createStyles(theme), [theme])
+
+  if (gradientConfig?.colors) {
+    return (
+      <LinearGradient
+        colors={gradientConfig?.colors}
+        start={gradientConfig?.start}
+        end={gradientConfig?.end}
+        locations={gradientConfig?.locations}
+        style={[styles.card, style]}
+      >
+        {children}
+      </LinearGradient>
+    )
+  }
 
   return <View style={[styles.card, style]}>{children}</View>
 }

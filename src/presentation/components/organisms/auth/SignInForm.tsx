@@ -94,7 +94,8 @@ export const SignInForm: React.FC<SignInScreenProps> = ({ navigation }) => {
         fullWidth
         disabled={!formik.isValid}
         loading={formik.isSubmitting}
-        onPress={() => formik.handleSubmit()}>
+        onPress={() => formik.handleSubmit()}
+      >
         <Typography variant='titleMedium'>Sign In</Typography>
       </Button>
     </View>

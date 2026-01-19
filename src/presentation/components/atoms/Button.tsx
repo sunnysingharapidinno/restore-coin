@@ -6,9 +6,12 @@ import {
   ViewStyle,
   TextStyle,
   TouchableOpacityProps,
+  ColorValue,
+  StyleProp,
 } from "react-native"
 import { useTheme } from "../../../shared/theme/ThemeContext"
 import { Typography } from "./Typography"
+import { LinearGradient, LinearGradientPoint } from "expo-linear-gradient"
 
 interface ButtonProps extends TouchableOpacityProps {
   variant?: "primary" | "secondary" | "text" | "outlined"
@@ -17,6 +20,13 @@ interface ButtonProps extends TouchableOpacityProps {
   loading?: boolean
   disabled?: boolean
   children: string | React.ReactNode
+  gradientConfig?: {
+    colors: readonly [ColorValue, ColorValue, ...ColorValue[]]
+    start?: LinearGradientPoint
+    end?: LinearGradientPoint
+    locations?: [number, number, ...number[]]
+    style?: StyleProp<ViewStyle>
+  }
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -27,6 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled = false,
   children,
   style,
+  gradientConfig,
   ...touchableProps
 }) => {
   const { theme } = useTheme()
@@ -142,12 +153,42 @@ export const Button: React.FC<ButtonProps> = ({
     }
   }
 
+  if (gradientConfig?.colors) {
+    return (
+      <TouchableOpacity
+        disabled={disabled || loading}
+        activeOpacity={0.8}
+        {...touchableProps}
+      >
+        <LinearGradient
+          colors={gradientConfig?.colors}
+          start={gradientConfig?.start}
+          end={gradientConfig?.end}
+          locations={gradientConfig?.locations}
+          style={[styles.button, style]}
+        >
+          {loading ? (
+            <ActivityIndicator
+              size='small'
+              color={variantStyles.text.color as string}
+            />
+          ) : (
+            <Typography variant={getTextVariant()} style={styles.text}>
+              {children}
+            </Typography>
+          )}
+        </LinearGradient>
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <TouchableOpacity
       style={[styles.button, style]}
       disabled={disabled || loading}
       activeOpacity={0.8}
-      {...touchableProps}>
+      {...touchableProps}
+    >
       {loading ? (
         <ActivityIndicator
           size='small'

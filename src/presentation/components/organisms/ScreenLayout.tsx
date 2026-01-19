@@ -1,10 +1,11 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useMemo } from "react"
 import { View, StyleSheet, StatusBar, Platform } from "react-native"
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { AppBar } from "../molecules"
 import { useTheme } from "../../../shared/theme/ThemeContext"
 import { ImageBackground } from "react-native"
 import AppImages from "../../../assets/images/AppImages"
+import { Theme } from "../../../shared/theme"
 
 interface ScreenLayoutProps {
   children: ReactNode
@@ -33,17 +34,21 @@ export const ScreenLayout: React.FC<ScreenLayoutProps> = ({
     Platform.OS === "android" ? StatusBar.currentHeight || 0 : 0
   const topSafeArea = Platform.OS === "ios" ? insets.top : statusBarHeight
 
+  const styles = useMemo(() => createStyles(theme), [theme])
+
   return (
     <View
       style={[
         styles.container,
         { backgroundColor: backgroundColor || theme.colors.background },
-      ]}>
+      ]}
+    >
       <ImageBackground
         source={AppImages.backgroundImg}
         style={{
           flex: 1,
-        }}>
+        }}
+      >
         {/* Status Bar Configuration */}
         <StatusBar
           barStyle='light-content'
@@ -81,7 +86,8 @@ export const ScreenLayout: React.FC<ScreenLayoutProps> = ({
           {Platform.OS === "ios" ? (
             <SafeAreaView
               style={styles.safeArea}
-              edges={["bottom", "left", "right"]}>
+              edges={["bottom", "left", "right"]}
+            >
               {children}
             </SafeAreaView>
           ) : (
@@ -93,17 +99,21 @@ export const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  statusBarArea: {
-    width: "100%",
-  },
-  content: {
-    flex: 1,
-  },
-  safeArea: {
-    flex: 1,
-  },
-})
+const createStyles = (theme: Theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    statusBarArea: {
+      width: "100%",
+    },
+    content: {
+      flex: 1,
+      maxWidth: theme.layout.containerMaxWidth,
+      alignSelf: "center",
+      width: "100%",
+    },
+    safeArea: {
+      flex: 1,
+    },
+  })
